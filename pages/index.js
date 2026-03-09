@@ -1,6 +1,6 @@
 function Home() {
     return <h1>
-        TESTE!
+        Ajustando
     </h1>
 }
 
