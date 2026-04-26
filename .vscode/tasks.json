@@ -1,0 +1,15 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Compile (Lint Check)",
+      "type": "shell",
+      "command": "npm run lint:check",
+      "problemMatcher": [],
+      "isBackground": false,
+      "presentation": {
+        "reveal": "never"
+      }
+    }
+  ]
+}

@@ -4,13 +4,14 @@
   "description": "Building Tabnews Clone - Curso.dev _-",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run docker-local:up && next dev",
     "lint:check": "prettier --check .",
     "lint:fix": "prettier --write .",
     "test": "jest",
-    "test:watch": "jest --watchAll",
+    "test:watch": "jest --watch",
     "docker-local:up": "docker compose -f infra/compose.yaml up -d",
-    "docker-local:down": "docker compose -f infra/compose.yaml down -d"
+    "docker-local:stop": "docker compose -f infra/compose.yaml stop",
+    "docker-local:down": "docker compose -f infra/compose.yaml down"
   },
   "author": "",
   "license": "MIT",
