@@ -1,4 +1,4 @@
-import { Client } from "pg";
+const { Client } = require("pg");
 
 async function query(queryObject) {
   const client = new Client({
@@ -18,6 +18,4 @@ async function query(queryObject) {
   return result;
 }
 
-export default {
-  query: query,
-};
+module.exports = { query: query };
