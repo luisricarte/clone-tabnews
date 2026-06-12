@@ -3,7 +3,9 @@ const { query } = require("infra/database");
 async function status(request, response) {
   const updatedAt = new Date().toISOString();
 
-  const connections = await getHowMuchConnections();
+  const databaseName = process.env.POSTGRES_DB;
+  const connections = await getHowMuchConnections(databaseName);
+
   const pg_version = await getVersionOfPostgres();
   const maxConnections = await getMaxConnections();
 
@@ -19,14 +21,13 @@ async function status(request, response) {
   });
 }
 
-const getHowMuchConnections = async () => {
+const getHowMuchConnections = async (databaseName) => {
   const valor = await query(
-    "SELECT count(*)::int as qtd from pg_stat_activity WHERE datname = 'postgres' AND state='active'",
-  );
-
-  const connectionCount = Number(valor.rows[0].qtd);
-
-  return connectionCount;
+    {text: "SELECT count(*)::int as qtd from pg_stat_activity WHERE datname = $1",
+      values: [databaseName]
+    }
+  ); 
+  return Number(valor?.rows[0].qtd) || '';
 };
 
 const getVersionOfPostgres = async () => {
